@@ -1,0 +1,63 @@
+<div class="scroll">
+<div class="upper">
+    <h1> Circle {{data.circle.name}}</h1>
+    <div>
+        <h3>Inflow:{{inflow}} -- Outflow:{{outflow}}</h3>
+    </div>
+    <h3>Balance : {{inflow - outflow}}</h3>
+
+</div>
+
+<div class="flex-auto p-6 sm:p-10">
+    <div class="table-container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <mat-form-field>
+            <input matInput (keyup)="aplicarFiltro($event)" placeholder="Search...">
+          </mat-form-field>
+        </div>
+      </div>
+  
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let member">{{ member.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let member">{{ member.type }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+        <mat-cell *matCellDef="let member">{{ member.category }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef> Select
+        </mat-header-cell>
+        <mat-cell *matCellDef="let member">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="toggleSelect(member)"
+                        [checked]="select.isSelected(member)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+  </div>
+  <mat-paginator [pageSizeOptions]="[5,25, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+<div style="display: block;">
+    <canvas baseChart
+            [data]="chartData"
+            [type]="chartType">
+    </canvas>
+  </div>
+</div>

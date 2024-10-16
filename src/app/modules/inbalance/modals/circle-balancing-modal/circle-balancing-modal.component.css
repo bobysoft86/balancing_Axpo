@@ -1,0 +1,8 @@
+.scroll{
+    overflow-y: auto;
+    max-height: 800px;
+  }
+  .upper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  }
